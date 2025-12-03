@@ -1,0 +1,16 @@
+# Ignore all non-Dart languages in linguist stats
+*.cpp linguist-detectable=false
+*.c linguist-detectable=false
+*.hpp linguist-detectable=false
+*.h linguist-detectable=false
+*.cmake linguist-detectable=false
+CMakeLists.txt linguist-detectable=false
+*.swift linguist-detectable=false
+*.html linguist-detectable=false
+*.md linguist-detectable=false
+*.txt linguist-detectable=false
+*.json linguist-detectable=false
+*.yaml linguist-detectable=false
+
+# Keep Dart detectable
+*.dart linguist-detectable=true
