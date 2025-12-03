@@ -72,8 +72,8 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
 
               Container(
-                width: 340,
-                height: 340,
+                width: 350,
+                height: 350,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.2),
@@ -205,29 +205,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   _onTap(int index) async {
-    // Check if cell is already taken BEFORE playing
     if (Player.playerX.contains(index) || Player.playerO.contains(index)) {
-      return; // Cell already taken, do nothing
+      return;
     }
 
-    // Play the game
     game.playGame(index, activePlayer);
     updateState();
+
+    if (!isSwitched && !gameOver && activePlayer == 'O') {
+      await Future.delayed(const Duration(milliseconds: 500));
+      game.autoPlay(activePlayer);
+      updateState();
+    }
   }
 
   void updateState() {
     setState(() {
-      // Switch player
       activePlayer = (activePlayer == 'X') ? 'O' : 'X';
       turn++;
 
-      // Check for winner
       String winnerCheck = game.checkWinner();
       if (winnerCheck != '') {
         gameOver = true;
         result = '$winnerCheck is the winner!';
       } else if (turn == 9) {
-        // Check for draw
         gameOver = true;
         result = 'It\'s a Draw!';
       }
